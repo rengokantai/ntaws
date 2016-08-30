@@ -40,3 +40,30 @@ Cannot attach more than one policy to an endpoint
 type=https, destnation=pl-xxxxxx
 
 #####Endpoints for Amazon S3
+- Cannot use a bucket policy or an IAM policy to allow access from a VPC CIDR range (the private IP address range). VPC CIDR blocks can be overlapping or identical, which may lead to unexpected results. 
+- Instead, use a bucket policy to restrict access to a specific endpoint or to a specific VPC, and you can use your route tables to control which instances can access resources in Amazon S3 via the endpoint.
+- Endpoints currently do not support cross-region requests
+- only create an endpoint in a subnet that is not used by any of these services  
+Cloudforamation, CodeDeploy, Elastic Beanstalk,Amazon EMR  
+
+######Using Endpoint Policies for Amazon S3
+######Using Amazon S3 Bucket Policies
+Reiterate:Cannot use the aws:SourceIp condition in your bucket policies for requests to Amazon S3 through a VPC endpoint. 
+Instead, adjust bucket policy to limit access to a specific VPC or a specific endpoint.  
+New attribute: Condition, StringNotEquals  
+restrict endpoint
+```
+"Condition": {
+  "StringNotEquals": {
+    "aws:sourceVpce": "vpce-12345678"
+  }
+}
+```
+restrict vpc
+```
+"Condition": {
+  "StringNotEquals": {
+    "aws:sourceVpce": "vpc-12345678"
+  }
+}
+```
