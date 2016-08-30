@@ -1,6 +1,16 @@
 ## ntaws
 ###VPC
+
+
+
+
+
 ####Networking in Your VPC
+
+#####[IP Addressing](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-ip-addressing.html)
+
+
+
 #####[Route Tables](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html)
 Each subnet in your VPC must be associated with a route table.  
 A subnet can only be associated with one route table at a time,
@@ -38,6 +48,12 @@ An endpoint policy does not override or replace IAM user policies or service-spe
 Cannot attach more than one policy to an endpoint
 ######Modifying Your Security Group (Add S3 to outbound)
 type=https, destnation=pl-xxxxxx
+
+
+
+
+
+
 
 #####Endpoints for Amazon S3
 - Cannot use a bucket policy or an IAM policy to allow access from a VPC CIDR range (the private IP address range). VPC CIDR blocks can be overlapping or identical, which may lead to unexpected results. 
