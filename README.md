@@ -51,8 +51,82 @@ Contains a ```decimal number``` that represents the priority of the MX record, a
 ```
 <Value>10 mail.example.com</Value>
 ```
+######NAPTR Format
+Name Authority Pointer.  
+######NS Format
+An NS record identifies the name servers for the hosted zone. The value for an NS record is the domain name of a name server. 
+```
+<Value>ns-1.example.com</Value>
+```
+######PTR Format
+A PTR record Value element is the same format as a domain name.
+```
+<Value>hostname.example.com</Value>
+```
+######SOA Format
+A start of authority (SOA) record provides information about a domain and the corresponding Amazon Route 53 hosted zone. 
+```
+<Value>ns-2048.awsdns-64.net hostmaster.awsdns.com 1 1 1 1 60</Value>
+```
+######SRV Format
+Four space-separated values. The first three values are decimal numbers representing priority, weight, and port. The fourth value is a domain name. 
+```
+<Value>10 5 80 hostname.example.com</Value>
+```
+######TXT Format
+A TXT record contains a space-separated list of double-quoted strings. A single string include a maximum of 255 characters.  
+Unlike domain names, case is preserved in character strings, meaning that Ab is not the same as aB
+```
+<Value>"This string includes \"quotation marks\"." "The last character in this string is an accented e specified in octal format: \351"</Value>
+```
+#####IP Address Ranges of Amazon Route 53 Servers
+#####DNS Constraints and Behaviors
+######Maximum Response Size
+To comply with DNS standards, responses sent over UDP are limited to 512 bytes in size. Responses exceeding 512 bytes are truncated and the resolver must re-issue the request over TCP. 
+
+
+====
+####Registering Domain Names Using Amazon Route 53
+#####Registering and Updating Domains / Registering Domain Names Using Amazon Route 53
+######To update the name servers for your domain when you want to use another DNS service
+8.(Optional) Delete the hosted zone that Amazon Route 53 created automatically ```when you registered your domain```. This prevents you from being charged for a hosted zone that you aren't using.
+====
+####Configuring Amazon Route 53 as Your DNS Service
+#####Migrating DNS Service for an Existing Domain to Amazon Route 53
+######Creating a Hosted Zone
+When you create a hosted zone, Amazon Route 53 automatically creates four name server (NS) records and a start of authority (SOA) record for the zone.
+######Getting Your Current DNS Configuration from Your DNS Service Provider
+Migrate A MX CNAME records.
+######Creating Resource Record Sets
+Do not create additional name server (NS) or start of authority (SOA) records in the Amazon Route 53 hosted zone, and do not delete the existing NS and SOA records.
+
+#####Creating a Subdomain That Uses Amazon Route 53 as the DNS Service without Migrating the Parent Domain
+######Creating a Hosted Zone for the New Subdomain
+step1:  create a hosted zone
+```
+b.example.com
+```
+######Creating Resource Record Sets
+######(most important) Updating Your DNS Service with Name Server Records for the Subdomain
+Update the DNS service for the parent domain by adding NS records for the subdomain.  
+This is known as delegating responsibility for the subdomain to Amazon Route 53.  
+Do not add SOA record.
+
+#####Migrating DNS Service for a Subdomain to Amazon Route 53 without Migrating the Parent Domain
+######Routing Traffic to an Amazon CloudFront Distribution (Public Hosted Zones Only)
+(?)
+####Routing Traffic to AWS Resources
+#####Routing Traffic to an AWS Elastic Beanstalk Environment
+
 ====
 ####Working with Resource Record Sets
+
+#####Choosing Between Alias and Non-Alias Resource Record Sets
+An alias resource record set contains a pointer to a ```CloudFront distribution```,```Elastic Beanstalk environment```,```load balancer```,```Amazon S3 bucket that is configured as a static website```, or ```another Amazon Route 53 resource record set``` in the same hosted zone.  
+You can't create alias resource record sets for CloudFront distributions in a private hosted zone.  
+If an alias resource record set points to a CloudFront distribution, an Elastic Beanstalk environment, an ELB load balancer, or an Amazon S3 bucket, you cannot set the time to live (TTL). Amazon Route 53 uses the CloudFront, Elastic Beanstalk, Elastic Load Balancing, or Amazon S3 TTLs.  
+The diff between CNAME and alias. see charts:  
+Amazon Route 53 charges for CNAME queries.  
 
 
 
