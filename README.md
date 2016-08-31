@@ -125,8 +125,13 @@ Do not add SOA record.
 An alias resource record set contains a pointer to a ```CloudFront distribution```,```Elastic Beanstalk environment```,```load balancer```,```Amazon S3 bucket that is configured as a static website```, or ```another Amazon Route 53 resource record set``` in the same hosted zone.  
 You can't create alias resource record sets for CloudFront distributions in a private hosted zone.  
 If an alias resource record set points to a CloudFront distribution, an Elastic Beanstalk environment, an ELB load balancer, or an Amazon S3 bucket, you cannot set the time to live (TTL). Amazon Route 53 uses the CloudFront, Elastic Beanstalk, Elastic Load Balancing, or Amazon S3 TTLs.  
+
 The diff between CNAME and alias. see charts:  
-Amazon Route 53 charges for CNAME queries.  
+|   |   |
+|---|---|
+|Amazon Route 53 charges for CNAME queries.  |Amazon Route 53 doesn't charge for alias|
+  
+  
 
 
 
