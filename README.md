@@ -1,4 +1,77 @@
 ## ntaws
+
+###Route 53
+####What Is Amazon Route 53
+Domain registration, DNS service(domain to ip), healch checking  
+######DNS Service
+If register a new domain name with Amazon Route 53 then automatically configure Amazon Route 53 as the DNS service for the domain, and create a ```hosted zone``` for thedomain.
+
+
+#####DNS Domain Name Format
+######Formatting Domain Names for Hosted Zones and Resource Record Sets
+Amazon Route 53 stores alphabetic characters as lowercase letters  
+
+Domain contains non english letter must escape  \three-digit octal code. 000-040,177-377, period  
+```
+ex\344mple.com.   //exämple.com (wrong)
+```
+If the domain name includes any characters other than a to z, 0 to 9, - (hyphen), or _ (underscore), Amazon Route 53 API actions return the characters as escape codes.  
+The Amazon Route 53 console displays the characters as characters, not as escape codes.
+######Using an Asterisk in the Names of Hosted Zones and Resource Record Sets
+- You can't include an * in the leftmost
+- For other positions, DNS treats it as an * character (ASCII 42), not as a wildcard.
+For resource record sets, if * use as wildcard:
+- The * must replace the leftmost label in a domain name.
+- The * must replace the entire label. The following are incorrect(*p.example.com or p*.example.com)
+- Cannot use the * as a wildcard for resource records sets that have a type of NS.  
+For resource record sets, if you include * in any position other than the leftmost label in a domain name, DNS treats it as an * character (ASCII 42), not as a wildcard.
+######Formatting Internationalized Domain Names
+Amazon Route 53 stores these internationalized domain names (IDNs) in Punycode, which represents Unicode characters as ASCII strings. 
+When enter an IDN in the address bar of a modern browser, the browser converts it to Punycode before submitting a DNS query or making an HTTP request.
+
+
+
+
+#####Supported DNS Resource Record Types
+For rrt include a domain name, enter a fully qualified domain name, for example, www.example.com. The trailing dot is optional.  
+Amazon Route 53 treats them identical.
+######A Format(IPv4)
+```
+<Value>192.0.2.1</Value>
+```
+######CNAME Format
+The DNS protocol ```does not``` allow you to create a CNAME record for the top node of a DNS namespace, also known as the zone apex. For example, if you register the DNS name example.com, the zone apex is example.com. You cannot create a CNAME record for example.com, but you can create CNAME records for www.example.com.  
+If you create a CNAME record for a subdomain, you cannot create any other resource record sets for that subdomain. For example, if you create a CNAME for www.example.com, you cannot create any other resource record sets for which the value of the Name field is www.example.com.  
+Aliases are similar in some ways to the CNAME resource record type; however, you can create an alias for the zone apex. 
+```
+<Value>k.ke.com</Value>
+```
+######MX Format
+Contains a ```decimal number``` that represents the priority of the MX record, and the domain name of an email server.
+```
+<Value>10 mail.example.com</Value>
+```
+====
+####Working with Resource Record Sets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###VPC
 
 
