@@ -188,6 +188,10 @@ Contact the AWS Support Center first.
 
 
 
+====
+
+
+
 
 
 
@@ -243,9 +247,21 @@ The diff between CNAME and alias. see charts:
 
 
 
+====
+####Health Checks and DNS Failover
+#####Creating, Updating, and Deleting Health Checks/Creating and Updating Health Checks
+====
+####Authentication and Access Control
+#####Overview of Managing Access Permissions to Your Amazon Route 53 Resources
 
 
 
+====
+####Capturing API Requests with CloudTrail
+
+====
+####Tagging Amazon Route 53 Resources
+When you apply tags to Amazon Route 53 hosted zones, domains, and health checks, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. 
 
 
 ###VPC
@@ -331,4 +347,37 @@ restrict vpc
     "aws:sourceVpce": "vpc-12345678"
   }
 }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===
+###S3
+####Introduction
+######Objects
+An object is uniquely identified within a bucket by a key (name) and a version ID. 
+######Keys
+Every object in a bucket has exactly one key.  
+http://doc.s3.amazonaws.com/2006-03-01/AmazonS3.wsdl, "doc" is the name of the bucket and "2006-03-01/AmazonS3.wsdl" is the key.
+
+######Amazon S3 Data Consistency Model
+Amazon S3 provides read-after-write consistency for PUTS of new objects in your S3 bucket in all regions with one caveat. The caveat is that if you make a HEAD or GET request to the key name (to find if the object exists) before creating the object, Amazon S3 provides eventual consistency for read-after-write.
+
+Amazon S3 does not currently support object locking. If two PUT requests are simultaneously made to the same key, the request with the latest time stamp wins. 
+```
+Read the three pics
 ```
