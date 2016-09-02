@@ -1,50 +1,52 @@
-Introduction
+##Introduction
 
-Objects
+######Objects
 
 An object is uniquely identified within a bucket by a key (name) and a version ID.
 
-Keys
+######Keys
 
 Every object in a bucket has exactly one key.
 http://doc.s3.amazonaws.com/2006-03-01/AmazonS3.wsdl, "doc" is the name of the bucket and "2006-03-01/AmazonS3.wsdl" is the key.
 
-Amazon S3 Data Consistency Model
+######Amazon S3 Data Consistency Model
 
 Amazon S3 provides read-after-write consistency for PUTS of new objects in your S3 bucket in all regions with one caveat. The caveat is that if you make a HEAD or GET request to the key name (to find if the object exists) before creating the object, Amazon S3 provides eventual consistency for read-after-write.
 
 Amazon S3 does not currently support object locking. If two PUT requests are simultaneously made to the same key, the request with the latest time stamp wins.
 
 Read the three pics
-Protecting Data in Amazon S3
+##Protecting Data in Amazon S3
 
 Amazon S3 also regularly verifies the integrity of data stored using checksums. If Amazon S3 detects data corruption, it is repaired using redundant data. Amazon S3's standard storage is:
 
 Amz S3 SLA
 Designed to provide 99.999999999% durability and 99.99% availability of objects over a given year
 Designed to sustain the concurrent loss of data in two facilities
-#####Server-Side Encryption ######Amazon S3-Managed Encryption Keys Server-side encryption encrypts only the object data. Any object metadata is not encrypted. ######Customer-Provided Encryption Keys
-With the encryption key you provide as part of your request, Amazon S3 manages both the encryption, as it writes to disks, and decryption, when you access your objects.
-When you upload an object, Amazon S3 uses the encryption key you provide to apply AES-256 encryption to your data and removes the encryption key from memory.
-When you retrieve an object, you must provide the same encryption key as part of your request.
-Client-Side Encryption
+###Data Encryption
+####Server-Side Encryption 
+######Amazon S3-Managed Encryption 
+- Keys Server-side encryption encrypts only the object data. Any object metadata is not encrypted. ######Customer-Provided Encryption Keys
+- With the encryption key you provide as part of your request, Amazon S3 manages both the encryption, as it writes to disks, and decryption, when you access your objects.  
+- When you upload an object, Amazon S3 uses the encryption key you provide to apply AES-256 encryption to your data and removes the encryption key from memory.  
+- When you retrieve an object, you must provide the same encryption key as part of your request.  
+####Client-Side Encryption
+#####Using an AWS KMS–Managed Customer Master Key
+#####Using a Client-Side Master Key
 
-Using an AWS KMS–Managed Customer Master Key
+###Reduced Redundancy Storage
 
-Using a Client-Side Master Key
-
-Reduced Redundancy Storage
-
-Setting the Storage Class of an Object You Upload
+####Setting the Storage Class of an Object You Upload
 
 To set the storage class of an object you upload to RRS, you set x-amz-storage-class to REDUCED_REDUNDANCY in a PUT request.
 
-Changing the Storage Class of an Object in Amazon S3
+####Changing the Storage Class of an Object in Amazon S3
 
-x-amz-metadata-directive set to COPY
+x-amz-metadata-directive set to COPY  
 x-amz-storage-class set to STANDARD, STANDARD_IA(Standard-Infrequent Access), or REDUCED_REDUNDANCY
 If you copy an object and fail to include the x-amz-storage-class request header, the storage class of the target object defaults to STANDARD.
 
+#####Return Code for Lost Data
 return error code=405 Method Not Allowed error
 
 Versioning
@@ -80,12 +82,12 @@ Managing Objects in a Versioning-Suspended Bucket/Deleting Objects from Versioni
 
 Even in a versioning-suspended bucket, the bucket owner can permanently delete a specified version. (delete with id specified)
 
-Hosting a Static Website
+##Hosting a Static Website
 
-Configure a Bucket for Website Hosting
+###Configure a Bucket for Website Hosting
 
 exp1: prefix(folder) redirection
-
+```
   <RoutingRules>
     <RoutingRule>
     <Condition>
@@ -96,8 +98,9 @@ exp1: prefix(folder) redirection
     </Redirect>
     </RoutingRule>
   </RoutingRules>
+```
 exp2: redirect to a file
-
+```
     <RoutingRules>
     <RoutingRule>
     <Condition>
@@ -108,8 +111,9 @@ exp2: redirect to a file
     </Redirect>
     </RoutingRule>
   </RoutingRules>
+```
 http error
-
+```
    <RoutingRules>
     <RoutingRule>
     <Condition>
@@ -121,7 +125,9 @@ http error
     </Redirect>
     </RoutingRule>
   </RoutingRules>
-#####Example Walkthroughs ######Example: Setting Up a Static Website Using a Custom Domain dig syntax
+```
+###Example Walkthroughs 
+####Example: Setting Up a Static Website Using a Custom Domain dig syntax
 
   dig +recurse +trace www.example.com any
 #####Notifications tbc
