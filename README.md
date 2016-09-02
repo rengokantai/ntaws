@@ -435,3 +435,61 @@ If there are versioned objects in the bucket, the version you PUT becomes the cu
 
 ######Managing Objects in a Versioning-Suspended Bucket/Deleting Objects from Versioning-Suspended Buckets
 Even in a versioning-suspended bucket, the bucket owner can permanently delete a specified version. (delete with id specified)
+
+####Hosting a Static Website
+#####Configure a Bucket for Website Hosting
+exp1: prefix(folder) redirection
+```
+  <RoutingRules>
+    <RoutingRule>
+    <Condition>
+      <KeyPrefixEquals>docs/</KeyPrefixEquals>
+    </Condition>
+    <Redirect>
+      <ReplaceKeyPrefixWith>documents/</ReplaceKeyPrefixWith>
+    </Redirect>
+    </RoutingRule>
+  </RoutingRules>
+  ```
+  exp2: redirect to a file
+  ```
+    <RoutingRules>
+    <RoutingRule>
+    <Condition>
+      <KeyPrefixEquals>docs/</KeyPrefixEquals>
+    </Condition>
+    <Redirect>
+      <ReplaceKeyWith>404.html</ReplaceKeyWith>
+    </Redirect>
+    </RoutingRule>
+  </RoutingRules>
+  ```
+  http error
+  ```
+   <RoutingRules>
+    <RoutingRule>
+    <Condition>
+      <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals >
+    </Condition>
+    <Redirect>
+      <HostName>ec2-11-22-333-44.compute-1.amazonaws.com</HostName>
+      <ReplaceKeyPrefixWith>report-404/</ReplaceKeyPrefixWith>
+    </Redirect>
+    </RoutingRule>
+  </RoutingRules>
+  ```
+  #####Example Walkthroughs
+  ######Example: Setting Up a Static Website Using a Custom Domain
+  dig syntax
+  ```
+  dig +recurse +trace www.example.com any
+  ```
+  
+  #####Notifications
+  tbc
+  
+  
+  
+  
+  ####Performance Optimization
+  #####Request Rate and Performance Considerations
