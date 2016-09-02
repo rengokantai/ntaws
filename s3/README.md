@@ -11,11 +11,51 @@ http://doc.s3.amazonaws.com/2006-03-01/AmazonS3.wsdl, "doc" is the name of the b
 
 ######Amazon S3 Data Consistency Model
 
-Amazon S3 provides read-after-write consistency for PUTS of new objects in your S3 bucket in all regions with one caveat. The caveat is that if you make a HEAD or GET request to the key name (to find if the object exists) before creating the object, Amazon S3 provides eventual consistency for read-after-write.
+- Amazon S3 provides read-after-write consistency for PUTS of new objects in your S3 bucket in all regions with one caveat. The caveat is that if you make a HEAD or GET request to the key name (to find if the object exists) before creating the object, Amazon S3 provides eventual consistency for read-after-write.  
 
-Amazon S3 does not currently support object locking. If two PUT requests are simultaneously made to the same key, the request with the latest time stamp wins.
+- Amazon S3 does not currently support object locking. If two PUT requests are simultaneously made to the same key, the request with the latest time stamp wins.  
 
-Read the three pics
+- Read the three pics  
+
+##Making Requests
+
+
+
+##Buckets
+###Restrictions and Limitations
+- Bucket ownership is not transferable
+- You cannot create a bucket within another bucket.
+- Bucket names must be a series of one or more labels. Adjacent labels are separated by a single period (.). 
+- Bucket names can contain lowercase letters, numbers, and hyphens. Each label must start and end with a lowercase letter or a number.
+- We recommend that you do not use periods (".") in bucket names.
+- The name of the bucket used for Amazon S3 Transfer Acceleration must be DNS-compliant and must not contain periods (".").
+- special:The rules for bucket names in the US East (N. Virginia) region allow bucket names to be as long as 255 characters, and bucket names can contain any combination of uppercase letters, lowercase letters, numbers, periods (.), hyphens (-), and underscores (_).
+
+###Requester Pays Buckets
+- A bucket owner can configure a bucket to be a Requester Pays bucket. With Requester Pays buckets, the requester instead of the bucket owner pays the cost of the request and the data download from the bucket. The bucket owner always pays the cost of storing data.
+- If you enable Requester Pays on a bucket, anonymous access to that bucket is not allowed.
+- You must authenticate all requests involving Requester Pays buckets. 
+- After you configure a bucket to be a Requester Pays bucket, requesters must include x-amz-request-payer in their requests either in the header, for POST, GET and HEAD requests
+
+(tbc)
+
+
+###Billing and Reporting
+
+
+
+##Managing Access
+###Introduction
+####Overview
+
+
+
+
+
+
+
+
+
 ##Protecting Data in Amazon S3
 
 Amazon S3 also regularly verifies the integrity of data stored using checksums. If Amazon S3 detects data corruption, it is repaired using redundant data. Amazon S3's standard storage is:
@@ -128,8 +168,18 @@ http error
 ```
 ###Example Walkthroughs 
 ####Example: Setting Up a Static Website Using a Custom Domain dig syntax
+```
+dig +recurse +trace www.example.com any
+```
+##Notifications 
+tbc
 
-  dig +recurse +trace www.example.com any
-#####Notifications tbc
+##Performance Optimization
+###Request Rate and Performance Considerations
 
-####Performance Optimization #####Request Rate and Performance Considerations
+##Monitoring with Amazon CloudWatch
+######Amazon S3 CloudWatch Metrics
+```
+BucketSizeBytes
+NumberOfObjects
+```
