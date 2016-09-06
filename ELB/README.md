@@ -20,3 +20,11 @@ Cross-zone load balancing is always enabled for an Application Load Balancer and
 - The nodes of an internal load balancer have only private IP addresses.  
 - Therefore, internal load balancers can only route requests from clients with access to the VPC for the load balancer.  
  
+##Getting Started
+Choose VPC. Add subnets. You can select only one subnet per Availability Zone.
+##Authentication and Access Control for Your Load Balancers
+######Resource-Level Permissions for Elastic Load Balancing
+Currently, the API for Application Load Balancers (API version 2015-12-01) ```does no```t support resource-level permissions. The API for Classic Load Balancers (API version 2012-06-01) ```supports resource-level``` permissions; however, not every API action supports resource-level permissions.
+
+##Migrate from a Classic Load Balancer to an Application Load Balancer
+(tbc)
