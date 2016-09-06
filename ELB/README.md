@@ -8,10 +8,12 @@ When the load balancer detects an unhealthy instance, it stops routing traffic t
 Diff between classic lb and application lb
 - With a Classic Load Balancer, you register instances with the load balancer. 
 - With an Application Load Balancer, you register the instances as targets in a target group, and route traffic to a target group.  
+
 ######Availability Zones and Instances
 With a Classic Load Balancer, we recommend that you enable multiple Availability Zones. With an Application Load Balancer, we require you to enable multiple Availability Zones.  
 If cross-zone load balancing is disabled, the load balancer distributes traffic evenly across all enabled Availability Zones.   
 Cross-zone load balancing is always enabled for an Application Load Balancer and is disabled by default for a Classic Load Balancer.  
+
 ######Load Balancer Scheme
 - When you create a load balancer, you must choose whether to make it an internal load balancer or an Internet-facing load balancer. 
 - Note that when you create a Classic Load Balancer in EC2-Classic, it must be an Internet-facing load balancer.   
