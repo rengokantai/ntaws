@@ -1,7 +1,7 @@
 ##What is
 Elastic Load Balancing distributes incoming application traffic across multiple EC2 instances, in multiple Availability Zones.(increases the fault tolerance)  
 You can also offload the work of encryption and decryption to your load balancer so that your instances can focus on their main work.  
-[application lb](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/)
+[application lb](http://docs.aws.amazon.com/elasticloadbalancing/latest/application/)  
 [classic lb](http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/)
 ##How Elastic Load Balancing Works
 When the load balancer detects an unhealthy instance, it stops routing traffic to that instance, and then resumes routing traffic to that instance when it detects that the instance is healthy again.  
