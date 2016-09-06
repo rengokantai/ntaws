@@ -21,6 +21,17 @@ Elastic Load Balancing supports two types of load balancers: Classic Load Balanc
 ###Creating a Launch Configuration
 
 
+##Auto Scaling Groups
+
+
+
+##Monitoring Your Auto Scaling Instances and Groups
+###Health Checks
+######Instance Health Status
+Auto Scaling marks an instance as unhealthy if its instance status is any value other than running or its system status is impaired.
+
+
+
 ##Controlling Access to Your Auto Scaling Resources
 ######Auto Scaling Actions
 [reference](http://docs.aws.amazon.com/AutoScaling/latest/APIReference/API_Operations.html)  
@@ -39,6 +50,14 @@ There are no supported Amazon Resource Names (ARNs) for Auto Scaling resources.
 ######Example IAM Policies for Auto Scaling
 
 ###Launch Auto Scaling Instances with an IAM Role
+######Create a Launch Configuration
+```
+aws autoscaling create-launch-configuration --launch-configuration-name myprofile --image-id ami-1234567 --instance-type m1.small --iam-instance-profile my-instance-profile
+```
+######Create an Auto Scaling Group
+```
+aws autoscaling create-auto-scaling-group --auto-scaling-group-name myavgprofile --launch-configuration-name myprofile --availability-zones "us-west-2c" --max-size 1 --min-size 1
+```
 
 
 ##Troubleshooting Auto Scaling
@@ -51,6 +70,8 @@ aws autoscaling describe-scaling-activities --auto-scaling-group-name ke
 Solution:
 - Create a new launch configuration with block device mappings supported by your instance type. 
 - Update your Auto Scaling group with the new launch configuration  
+
+
 ######Placement groups may not be used with instances of type 'm1.large'. Launching EC2 instance failed.
 ###Capacity Limits
 
