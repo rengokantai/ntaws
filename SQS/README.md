@@ -17,3 +17,20 @@ sqs.sendMessage(new SendMessageRequest()
     .withQueueUrl(myQueueUrl)
     .withMessageBody("This is my message text."))
 ```
+
+###Receiving a Message
+######AWS Management Console  
+Select View/Delete Messages from the Queue Actions drop-down list.
+
+###Deleting a Message
+```
+System.out.println("Deleting a message.\n");
+String messageReceiptHandle = messages.get(0).getReceiptHandle();
+sqs.deleteMessage(new DeleteMessageRequest()
+    .withQueueUrl(myQueueUrl)
+    .withReceiptHandle(messageReceiptHandle));
+```
+
+###Purging the Queue
+##Where Do I Go from Here?
+(tbc)
