@@ -17,4 +17,10 @@ You can mount multiple volumes on the same instance, ```but each volume can be a
 - Throughput Optimized HDD (st1) volumes provide low-cost magnetic storage, 500 MiB/s of throughput, this volume type is a good fit for large, sequential workloads such as Amazon EMR, ETL, data warehouses, and log processing.
 - Cold HDD (sc1) volumes provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS. With throughput of up to 250 MiB/s, sc1 is a good fit ideal for large, sequential, cold-data workloads.  
 
-EBS volumes are created in a specific Availability Zone, and can then be attached to any instances in that same Availability Zone. 
+EBS volumes are created in a specific Availability Zone, and can then be attached to any instances in that same Availability Zone.  
+To make a volume available outside of the Availability Zone, you can create a snapshot and restore that snapshot to a new volume anywhere in that region.
+
+####Amazon EBS Volumes
+######Benefits of Using EBS Volumes
+- An EBS volume is off-instance storage that can persist independently from the life of an instance. You continue to pay for the volume usage as long as the data persists.
+- 
