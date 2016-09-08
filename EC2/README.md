@@ -70,3 +70,9 @@ Ex
 12.5 TiB x (40 MiB/s/1 TiB)  = 500 MiB/s
 ```
 ######Creating an Amazon EBS Volume
+New EBS volumes receive their maximum performance the moment that they are available and do not require initialization (formerly known as pre-warming). However, storage blocks on volumes that were restored from snapshots must be initialized (pulled down from Amazon S3 and written to the volume) before you can access the block.  
+- To create an EBS volume using the command line  
+```
+create-volume (AWS CLI)
+New-EC2Volume (AWS Tools for Windows PowerShell)
+```
