@@ -22,5 +22,13 @@ To make a volume available outside of the Availability Zone, you can create a sn
 
 ####Amazon EBS Volumes
 ######Benefits of Using EBS Volumes
-- An EBS volume is off-instance storage that can persist independently from the life of an instance. You continue to pay for the volume usage as long as the data persists.
-- 
+- Data persistence  
+An EBS volume is off-instance storage that can persist independently from the life of an instance. You continue to pay for the volume usage as long as the data persists.
+- Data encryption  
+Amazon EBS encryption uses 256-bit Advanced Encryption Standard algorithms (AES-256) and an Amazon-managed key infrastructure.  
+Amazon EBS encryption uses AWS Key Management Service (AWS KMS) master keys when creating encrypted volumes and any snapshots created from your encrypted volumes.  
+
+- snapshots  
+
+#####Amazon EBS Volume Types
+
