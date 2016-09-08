@@ -144,6 +144,15 @@ Select the instance, open the Description tab, and view the Block devices list.T
 create a snapshot from this volume id  
 create a volume from this snapshot  
 create a new instance, detach default root volume, attach the volume we created
+###Troubleshooting Terminating (Shutting Down) Your Instance
+
+###Troubleshooting Instance Recovery Failures
+###Troubleshooting Instances with Failed Status Checks
+(tbc)
+###Troubleshooting Instance Capacity
+######Error: InsufficientInstanceCapacity
+
+###Getting Console Output and Rebooting Instances
 
 
 
