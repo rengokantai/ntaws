@@ -69,10 +69,75 @@ Ex
 ```
 12.5 TiB x (40 MiB/s/1 TiB)  = 500 MiB/s
 ```
-######Creating an Amazon EBS Volume
+#####Creating an Amazon EBS Volume
 New EBS volumes receive their maximum performance the moment that they are available and do not require initialization (formerly known as pre-warming). However, storage blocks on volumes that were restored from snapshots must be initialized (pulled down from Amazon S3 and written to the volume) before you can access the block.  
 - To create an EBS volume using the command line  
 ```
 create-volume (AWS CLI)
 New-EC2Volume (AWS Tools for Windows PowerShell)
 ```
+#####Restoring from a Snapshot
+New volumes created from existing EBS snapshots load lazily in the background. This means that after a volume is created from a snapshot, there is no need to wait for all of the data to transfer from Amazon S3 to your EBS volume before your attached instance can start accessing the volume and all its data.  
+You cannot directly restore an EBS volume from a shared encrypted snapshot that you do not own. You must first create a copy of the snapshot, which you will own. You can then restore a volume from that copy.  
+If you need to ensure that your restored volume always functions at peak capacity in production, you can force the immediate initialization of the entire volume using dd or fio.  
+
+#####Attaching an Amazon EBS Volume to an Instance
+To attach an EBS volume to an instance using the command line
+```
+attach-volume (AWS CLI)
+Add-EC2Volume (AWS Tools for Windows PowerShell)
+```
+#####Making an Amazon EBS Volume Available for Use
+(tbc)
+#####Volume Information
+- To view information about an EBS volume using the command line  
+```
+describe-volumes (AWS CLI)
+Get-EC2Volume (AWS Tools for Windows PowerShell)
+```
+#####Monitoring the Status of Your Volumes
+######Monitoring Volumes with CloudWatch
+some metrics:
+```
+VolumeReadBytes
+VolumeWriteBytes
+```
+######Monitoring Volumes with Status Checks
+Volume status checks are automated tests that run every 5 minutes and return a pass or fail status.   
+Volume status is based on the volume status checks, and does not reflect the volume state. Therefore, volume status does not indicate volumes in the error state (for example, when a volume is incapable of accepting I/O.)  
+
+(tbc)
+
+
+
+##Troubleshooting
+###What To Do If An Instance Immediately Terminates
+######Getting the Reason for Instance Termination
+Reasons
+- You've reached your EBS volume limit. For information about the volume limit, and to submit a request to increase your volume limit, see Request to Increase the Amazon EBS Volume Limit.
+- An EBS snapshot is corrupt.  
+
+describe reason aws cli
+```
+aws ec2 describe-instances --instance-id instance_id
+```
+###Troubleshooting Connecting to Your Instance
+######Error connecting to your instance: Connection timed out
+Check your security group rules. You need a security group rule that allows inbound traffic.  
+In route table, choose Edit, Add another route, enter 0.0.0.0/0 in Destination, select your Internet gateway from Target.  
+The default network ACL allows all inbound and outbound traffic.(enable both inbound and outbound)  
+Check that your instance has a public IP address.  
+######Error: Host key not found, Permission denied (publickey), or Authentication failed, permission denied
+default user:
+- For an Amazon Linux AMI, the user name is ec2-user.
+- For a RHEL5 AMI, the user name is either root or ec2-user.
+- For an Ubuntu AMI, the user name is ubuntu.
+- For a Fedora AMI, the user name is either fedora or ec2-user.
+- For SUSE Linux, the user name is either root or ec2-user.  
+
+######Error: Unprotected Private Key File
+chmod 400  
+
+
+
+
