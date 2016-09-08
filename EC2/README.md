@@ -138,6 +138,12 @@ default user:
 ######Error: Unprotected Private Key File
 chmod 400  
 
+###Troubleshooting Stopping Your Instance
+- To create a replacement instance (if the previous procedure fails)  
+Select the instance, open the Description tab, and view the Block devices list.Take note root volume's ID  
+create a snapshot from this volume id  
+create a volume from this snapshot  
+create a new instance, detach default root volume, attach the volume we created
 
 
 
