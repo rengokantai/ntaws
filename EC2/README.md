@@ -54,4 +54,19 @@ Throughput limit with empty I/O credit balance  =  (Max throughput) x (Baseline 
 100GiB=128MiB/s Max throughput   
 250-300Gib=160MiB/s Max throughput  
 
+
 ######Provisioned IOPS SSD (io1) Volumes
+Instead of using a bucket and credit model to calculate performance, an io1 volume allows you to specify a consistent IOPS rate when you create the volume.  
+The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1. For example, a 100 GiB volume can be provisioned with up to 5,000 IOPS.  
+Any volume 400 GiB in size or greater allows provisioning up to the 20,000 IOPS maximum.  
+
+######Throughput Optimized HDD (st1) Volumes
+Throughput Optimized HDD (st1) volumes provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS. This volume type is a good fit for large, sequential workloads such as Amazon EMR, ETL, data warehouses, and log processing.  
+```
+(Volume size) x (Credit accumulation rate per TiB) = Baseline Throughput
+```
+Ex
+```
+12.5 TiB x (40 MiB/s/1 TiB)  = 500 MiB/s
+```
+######Creating an Amazon EBS Volume
