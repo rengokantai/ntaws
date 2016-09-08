@@ -29,6 +29,29 @@ Amazon EBS encryption uses 256-bit Advanced Encryption Standard algorithms (AES-
 Amazon EBS encryption uses AWS Key Management Service (AWS KMS) master keys when creating encrypted volumes and any snapshots created from your encrypted volumes.  
 
 - snapshots  
-
+ If you have a volume with 100 GiB of data, but only 5 GiB of data have changed since your last snapshot, only the 5 GiB of modified data is written to Amazon S3.
 #####Amazon EBS Volume Types
+Max. IOPS**/Volume	            gp2/10,000	io1/20,000	st1/500	sc1/250  
+(To achieve this throughput, you must have an instance that supports it, such as r3.8xlarge or x1.32xlarge.)  
+Dominant Performance Attribute	IOPS	      IOPS	      MiB/s	  MiB/s  
+(gp2/io1 based on 16KiB I/O size, st1/sc1 based on 1 MiB I/O size)   
 
+Linux AMIs require GPT partition tables and GRUB 2 for boot volumes 2 TiB (2048 GiB) or larger.  
+Non-boot volumes do not have this limitation on Linux instances.  
+######General Purpose SSD (gp2) Volumes
+- I/O Credits and Burst Performance
+The performance of gp2 volumes is tied to volume size, which determines the baseline performance level of the volume and how quickly it accumulates I/O credits   
+The more credits your volume has for I/O, the more time it can burst beyond its baseline performance level and the better it performs when more performance is needed.  
+
+```
+Burst duration  =  (Credit balance)/(Burst IOPS) - 3(Volume size in GiB)
+```
+- What happens if I empty my I/O credit balance?  
+```
+Throughput limit with empty I/O credit balance  =  (Max throughput) x (Baseline IOPS)/3,000
+```
+- Throughput Performance  
+100GiB=128MiB/s Max throughput   
+250-300Gib=160MiB/s Max throughput  
+
+######Provisioned IOPS SSD (io1) Volumes
