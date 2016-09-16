@@ -190,6 +190,13 @@ Response headers returned by all operations:
 - x-amz-request-id: A unique ID assigned to each request by the system.  
 - x-amz-id-2: A special token that will help us to troubleshoot problems.  
 
+####Error Response
+#####Error Code
+###Amazon S3 Error Best Practices
+
+######Retry InternalErrors
+If Amazon S3 returns an InternalError response, retry the request.
+
 ##Troubleshooting Amazon S3
 ######General: Getting my Amazon S3 request IDs
 - Using HTTP  
