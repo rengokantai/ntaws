@@ -183,3 +183,24 @@ tbc
 BucketSizeBytes
 NumberOfObjects
 ```
+##Error Handling
+###The REST Error Response
+######Response Headers
+Response headers returned by all operations:
+- x-amz-request-id: A unique ID assigned to each request by the system.  
+- x-amz-id-2: A special token that will help us to troubleshoot problems.  
+
+##Troubleshooting Amazon S3
+######General: Getting my Amazon S3 request IDs
+- Using HTTP  
+
+You can obtain your request IDs, x-amz-request-id and x-amz-id-2 by logging the bits of an HTTP request before the it reaches the target application.  
+
+##Server Access Logging
+######Ovewview
+Each access log record provides details about a single access request.  
+There is no extra charge for enabling server access logging on an Amazon S3 bucket.  
+- Best Effort Server Log Delivery  
+The completeness and timeliness of server logging, however, is not guaranteed. The log record for a particular request might be delivered long after the request was actually processed, or it might not be delivered at all.  
+###Log Format
+- 
