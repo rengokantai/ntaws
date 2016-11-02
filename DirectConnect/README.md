@@ -25,8 +25,41 @@ Routes per Border Gateway Protocol (BGP) session=100 (cannot be increased.)
 
 
 
+## Working With Virtual Interfaces
+You must create a virtual interface to begin using your AWS Direct Connect connection. You can create a public virtual interface to connect to public resources, or a private virtual interface to connect to your VPC. 
 
 
+
+
+## Requesting Cross Connects
+- An AWS Direct Connect location provides access to AWS in the region it is associated with. 
+- You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions.
+- You can configure multiple virtual interfaces on a single AWS Direct Connect connection, and you'll need one private virtual interface for each VPC to connect to. Each virtual interface needs a VLAN ID, interface IP address, ASN, and BGP key.  
+
+### View Virtual Interface Details
+
+
+
+
+
+
+## Troubleshooting
+### Troubleshooting a Cross Connection to AWS Direct Connect
+- Verify that your device is supported by AWS Direct Connect. If not, get a device that meets the AWS Direct Connect requirements. 
+- Verify that your AWS Direct Connect cross connects are established. 
+- Verify that your router’s link lights are working. 
+- Verify with your colocation provider that there are no cabling problems.
+- If you cannot ping the Amazon IP address, verify that the interface IP address is in the VLAN you provided to Amazon Web Services and then verify your firewall settings.
+- If you cannot establish Border Gateway Protocol (BGP) after verifying the password provided by Amazon, open a support ticket.
+- If you are not receiving Amazon routes and you cannot verify public BGP routing policy, open ticket.
+
+
+### Troubleshooting a Remote Connection to AWS Direct Connect
+step 1,2,3,4 same as above  
+- Ask your service provider to turn off Auto Negotiation on their device
+- On your device, turn off Auto Negotiation, set the device to Full Duplex, and set the device to the correct speed.
+
+If the cross connect is not completed within 90 days, the authority granted by the LOA-CFA expires. To renew a LOA-CFA that has expired, you can download it again from the AWS Direct Connect console. 
 
 
 
